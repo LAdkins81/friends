@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Friendly Friend</title>
+  </head>
+  <body>
+    <h5><a href="{% url 'login:logout' %}">Logout</a></h5>
+    <h3>Welcome to Friendly Friends, {{request.session.name}}!!</h3>
+    {% if all_friends %}
+    {% else %}
+      <h3>You have no friends yet!</h3>
+    {% endif %}
+    <table>
+      <thead>
+        <tr>
+          <th>ALIAS</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for friend in all_friends %}
+        <tr>
+          <td>{{friend.friend.alias}}</td>
+          <td><a href="{% url 'friend:userinfo' user_id=friend.friend.id %}">View</a> OR <a href="{% url 'friend:removefriend' friendship_id=friend.id %}">Remove</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <tr>
+          <th>ALIAS</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in all_users %}
+        <tr>
+          <td><a href="{% url 'friend:userinfo' user_id=user.id %}">{{user.alias}}</a></td>
+          <td><a href="{% url 'friend:addfriend' friend_id=user.id %}">Add as Friend</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

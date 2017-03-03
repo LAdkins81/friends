@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Friendly Friends</title>
+  </head>
+  <body>
+    <h5><a href="{% url 'login:logout' %}">Logout</a></h5>
+    <h5><a href="{% url 'friend:index' %}">Home</a></h5>
+    {% for u in user %}
+    <h2>{{u.alias}}'s Profile</h2>
+    <br>
+    <br>
+    <h4>Name: {{u.name}}</h4>
+    <h4>Email: {{u.email}}</h4>
+    {% endfor %}
+  </body>
+</html>
